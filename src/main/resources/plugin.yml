@@ -1,0 +1,8 @@
+name: CaeruleumCore
+version: ${version}
+main: cn.dreeam.caeruleum.CaeruleumCore
+authors:
+  - Dreeam-qwq
+description: ${description}
+api-version: 1.13
+folia-supported: true
