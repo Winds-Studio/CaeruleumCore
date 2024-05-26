@@ -34,14 +34,17 @@ public class PermUtil {
         return perms.size() == 1;
     }
 
-    public static void applyLangPerm(UUID uuid, String locale) {
-        String langPerm = CaeruleumCore.config.langPermKeyPrefix() + locale;
-
+    public static void applyLangPerm(UUID uuid, String langPerm) {
         CaeruleumCore.getLuckPermsAPI().getUserManager().modifyUser(uuid, user ->
                 user.data().add(Node.builder(langPerm).build())
         );
     }
 
-    public static void removeLangPerm(UUID uuid) {
+    public static void modifyLangPerm(UUID uuid, String langPerm) {
+        CaeruleumCore.getLuckPermsAPI().getUserManager().modifyUser(uuid, user -> {
+                    user.data().clear(x -> x.getKey().startsWith(CaeruleumCore.config.langPermKeyPrefix()));
+                    user.data().add(Node.builder(langPerm).build());
+                }
+        );
     }
 }

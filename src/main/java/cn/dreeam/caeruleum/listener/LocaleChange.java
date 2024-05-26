@@ -1,5 +1,6 @@
 package cn.dreeam.caeruleum.listener;
 
+import cn.dreeam.caeruleum.CaeruleumCore;
 import cn.dreeam.caeruleum.utils.PermUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,13 +14,21 @@ public class LocaleChange implements Listener {
     @EventHandler
     public void onLocaleChange(PlayerLocaleChangeEvent e) {
         // Should add threshold to prevent lag
-        String locale = e.getPlayer().locale().toString();
+        String locale = e.locale().toString();
         UUID uuid = e.getPlayer().getUniqueId();
 
         Set<String> langPerm = PermUtil.getLangPerm(uuid);
 
-        if (!PermUtil.hasLangPerm(langPerm) && !langPerm.contains(locale)) {
-            PermUtil.applyLangPerm(uuid, locale);
+        if (true/*allowedLocale*/) {
+            String langPermNode = CaeruleumCore.config.langPermKeyPrefix() + locale;
+
+            if (PermUtil.hasLangPerm(langPerm)) {
+                if (!langPerm.contains(langPermNode)) {
+                    PermUtil.modifyLangPerm(uuid, langPermNode);
+                }
+            } else {
+                PermUtil.applyLangPerm(uuid, langPermNode);
+            }
         }
     }
 }
