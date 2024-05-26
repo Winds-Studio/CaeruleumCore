@@ -41,4 +41,7 @@ public class PermUtil {
                 user.data().add(Node.builder(langPerm).build())
         );
     }
+
+    public static void removeLangPerm(UUID uuid) {
+    }
 }

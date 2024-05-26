@@ -56,6 +56,9 @@ public class CaeruleumCore extends JavaPlugin {
         RegisteredServiceProvider<LuckPerms> luckPermsProvider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (luckPermsProvider != null) {
             luckPermsAPI = luckPermsProvider.getProvider();
+        } else {
+            LOGGER.fatal("You need installing LuckPerms to let CaeruleumCore work!");
+            getServer().shutdown();
         }
     }
 
