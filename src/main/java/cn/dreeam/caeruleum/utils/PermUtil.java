@@ -3,6 +3,7 @@ package cn.dreeam.caeruleum.utils;
 import cn.dreeam.caeruleum.CaeruleumCore;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.model.user.UserManager;
+import net.luckperms.api.node.Node;
 import net.luckperms.api.node.NodeType;
 import net.luckperms.api.node.types.PermissionNode;
 
@@ -20,13 +21,24 @@ public class PermUtil {
         return userFuture.join();
     }
 
-    public static boolean hasLangPerm(UUID uuid) {
+    public static Set<String> getLangPerm(UUID uuid) {
         User user = getUser(uuid);
-        Set<String> groups = user.getNodes(NodeType.PERMISSION).stream()
-                .map(PermissionNode::getPermission)
-                .filter(s -> !s.startsWith(CaeruleumCore.config.langPermKeyPrefix()))
-                .collect(Collectors.toSet());
 
-        return !groups.isEmpty();
+        return user.getNodes(NodeType.PERMISSION).stream()
+                .map(PermissionNode::getPermission)
+                .filter(s -> s.startsWith(CaeruleumCore.config.langPermKeyPrefix()))
+                .collect(Collectors.toSet());
+    }
+
+    public static boolean hasLangPerm(Set<String> perms) {
+        return perms.size() == 1;
+    }
+
+    public static void applyLangPerm(UUID uuid, String locale) {
+        String langPerm = CaeruleumCore.config.langPermKeyPrefix() + locale;
+
+        CaeruleumCore.getLuckPermsAPI().getUserManager().modifyUser(uuid, user ->
+                user.data().add(Node.builder(langPerm).build())
+        );
     }
 }
