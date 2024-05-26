@@ -11,10 +11,6 @@ description = "A utility plugin used to allocate lang permission for i18n enviro
 repositories {
     mavenCentral()
 
-    flatDir {
-        dirs("./libs")
-    }
-
     // PaperMC
     maven {
         name = "papermc-repo"
@@ -26,6 +22,8 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
     implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
     implementation("org.bstats:bstats-bukkit:3.0.2")
+
+    compileOnly("net.luckperms:api:5.4")
 }
 
 tasks.withType<JavaCompile> {
