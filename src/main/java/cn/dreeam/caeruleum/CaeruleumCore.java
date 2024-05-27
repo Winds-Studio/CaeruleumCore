@@ -55,7 +55,7 @@ public class CaeruleumCore extends JavaPlugin {
         if (luckPermsProvider != null) {
             luckPermsAPI = luckPermsProvider.getProvider();
         } else {
-            LOGGER.fatal("You need installing LuckPerms to let CaeruleumCore work!");
+            LOGGER.fatal("You need installing LuckPerms to get CaeruleumCore work!");
             getServer().shutdown();
         }
     }
