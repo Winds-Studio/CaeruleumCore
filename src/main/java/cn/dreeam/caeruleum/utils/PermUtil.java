@@ -7,10 +7,9 @@ import net.luckperms.api.node.Node;
 import net.luckperms.api.node.NodeType;
 import net.luckperms.api.node.types.PermissionNode;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 public class PermUtil {
 
@@ -21,16 +20,16 @@ public class PermUtil {
         return userFuture.join();
     }
 
-    public static Set<String> getLangPerm(UUID uuid) {
+    public static List<String> getLangPerm(UUID uuid) {
         User user = getUser(uuid);
 
         return user.getNodes(NodeType.PERMISSION).stream()
                 .map(PermissionNode::getPermission)
                 .filter(s -> s.startsWith(CaeruleumCore.config.langPermKeyPrefix()))
-                .collect(Collectors.toSet());
+                .toList();
     }
 
-    public static boolean hasLangPerm(Set<String> perms) {
+    public static boolean hasLangPerm(List<String> perms) {
         return perms.size() == 1;
     }
 
@@ -45,6 +44,12 @@ public class PermUtil {
                     user.data().clear(x -> x.getKey().startsWith(CaeruleumCore.config.langPermKeyPrefix()));
                     user.data().add(Node.builder(langPerm).build());
                 }
+        );
+    }
+
+    public static void clearLangPerm(UUID uuid) {
+        CaeruleumCore.getLuckPermsAPI().getUserManager().modifyUser(uuid, user ->
+                user.data().clear(x -> x.getKey().startsWith(CaeruleumCore.config.langPermKeyPrefix()))
         );
     }
 }
