@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLocaleChangeEvent;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,12 +22,12 @@ public class LocaleChange implements Listener {
             PermUtil.clearLangPerm(uuid);
         }
 
-        if (Arrays.asList(CaeruleumCore.config.mainLocale()).contains(locale)) {
+        if (CaeruleumCore.config.mainLocale().contains(locale)) {
             // Return or give default/fallback
             return;
         }
 
-        List<String> localeBlackWhiteList = Arrays.asList(CaeruleumCore.config.localeBlackWhiteList());
+        List<String> localeBlackWhiteList = CaeruleumCore.config.localeBlackWhiteList();
         boolean useWhitelist = CaeruleumCore.config.localeBlackWhiteListUseWhitelist();
 
         if ((useWhitelist && !localeBlackWhiteList.contains(locale))

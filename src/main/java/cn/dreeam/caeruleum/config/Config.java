@@ -6,6 +6,8 @@ import space.arim.dazzleconf.annote.ConfHeader;
 import space.arim.dazzleconf.annote.ConfKey;
 import space.arim.dazzleconf.sorter.AnnotationBasedSorter;
 
+import java.util.List;
+
 @ConfHeader({
         "CaeruleumCore 1.0.0-SNAPSHOT",
         "Contact me on QQ:2682173972 or Discord: dreeam___",
@@ -30,7 +32,7 @@ public interface Config {
             "winds.i18n.oldkey.example."
     })
     @AnnotationBasedSorter.Order(2)
-    String[] oldLangPermPrefixList();
+    List<String> oldLangPermPrefixList();
 
     /*
     Need redesign here, since, if don't assign any lang permission to those content, it will show for all players.
@@ -49,7 +51,7 @@ public interface Config {
             "lzh"
     })
     @AnnotationBasedSorter.Order(3)
-    String[] mainLocale();
+    List<String> mainLocale();
 
     @ConfKey("i18nPerm.locale-list.fallback-locale")
     @ConfComments({
@@ -82,6 +84,6 @@ public interface Config {
             "en_US"
     })
     @AnnotationBasedSorter.Order(6)
-    String[] localeBlackWhiteList();
+    List<String> localeBlackWhiteList();
 }
 
