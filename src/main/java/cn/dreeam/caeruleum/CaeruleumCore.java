@@ -3,13 +3,18 @@ package cn.dreeam.caeruleum;
 import cn.dreeam.caeruleum.config.Config;
 import cn.dreeam.caeruleum.config.ConfigManager;
 import cn.dreeam.caeruleum.listener.LocaleChange;
+import cn.dreeam.caeruleum.utils.PermUtil;
 import net.luckperms.api.LuckPerms;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class CaeruleumCore extends JavaPlugin {
 
@@ -30,6 +35,7 @@ public class CaeruleumCore extends JavaPlugin {
         loadConfig();
         registerEvents();
         initHooks();
+        initTasks();
         //new Metrics(instance, 16810);
 
         LOGGER.info("CaeruleumCore {} enabled. By Dreeam.", instance.getDescription().getVersion());
@@ -51,12 +57,30 @@ public class CaeruleumCore extends JavaPlugin {
     }
 
     private void initHooks() {
+        // Hook LuckPerms
         RegisteredServiceProvider<LuckPerms> luckPermsProvider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (luckPermsProvider != null) {
             luckPermsAPI = luckPermsProvider.getProvider();
         } else {
             LOGGER.fatal("You need installing LuckPerms to get CaeruleumCore work!");
             getServer().shutdown();
+        }
+    }
+
+    private void initTasks() {
+        // Clear old perms task
+        if (!config.oldLangPermPrefixList().isEmpty()) {
+            Thread.startVirtualThread(
+                    () -> Arrays.stream(Bukkit.getServer().getOfflinePlayers())
+                    .filter(OfflinePlayer::hasPlayedBefore)
+                    .collect(Collectors.toSet())
+                    .forEach(
+                            p -> config.oldLangPermPrefixList()
+                                    .forEach(
+                                    oldLangPermPrefix -> PermUtil.clearLangPerm(p.getUniqueId(), oldLangPermPrefix)
+                            )
+                    )
+            );
         }
     }
 

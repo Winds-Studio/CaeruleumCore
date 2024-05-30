@@ -48,8 +48,12 @@ public class PermUtil {
     }
 
     public static void clearLangPerm(UUID uuid) {
+        clearLangPerm(uuid, CaeruleumCore.config.langPermKeyPrefix());
+    }
+
+    public static void clearLangPerm(UUID uuid, String permPrefix) {
         CaeruleumCore.getLuckPermsAPI().getUserManager().modifyUser(uuid, user ->
-                user.data().clear(x -> x.getKey().startsWith(CaeruleumCore.config.langPermKeyPrefix()))
+                user.data().clear(x -> x.getKey().startsWith(permPrefix))
         );
     }
 }
