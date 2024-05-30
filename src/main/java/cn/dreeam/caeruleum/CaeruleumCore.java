@@ -7,6 +7,7 @@ import cn.dreeam.caeruleum.utils.PermUtil;
 import net.luckperms.api.LuckPerms;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
@@ -36,7 +37,7 @@ public class CaeruleumCore extends JavaPlugin {
         registerEvents();
         initHooks();
         initTasks();
-        //new Metrics(instance, 16810);
+        new Metrics(instance, 22069);
 
         LOGGER.info("CaeruleumCore {} enabled. By Dreeam.", instance.getDescription().getVersion());
     }
