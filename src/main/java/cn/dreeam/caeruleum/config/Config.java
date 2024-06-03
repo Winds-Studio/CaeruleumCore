@@ -53,13 +53,30 @@ public interface Config {
     @AnnotationBasedSorter.Order(3)
     List<String> mainLocale();
 
+    @ConfKey("i18nPerm.locale-change-interval-limit")
+    @ConfComments({
+            "The maximum interval for locale change, to prevent using packet exploit to lag server, locale change between this interval will be discard.",
+            "(unit: ms)"
+    })
+    @ConfDefault.DefaultInteger(1000)
+    @AnnotationBasedSorter.Order(4)
+    int localeChangeIntervalLimit();
+
+    @ConfKey("i18nPerm.locale-change-interval-limit-message")
+    @ConfComments({
+            "The message sent to player when reached the interval limit."
+    })
+    @ConfDefault.DefaultString("<red>You can not change locale so fast!")
+    @AnnotationBasedSorter.Order(5)
+    String localeChangeIntervalLimitMessage();
+
     @ConfKey("i18nPerm.locale-list.fallback-locale")
     @ConfComments({
             "The fallback locale, if any unknown or unsupported locale found when player join/change locale,",
             "CaeruleumCore will assign lang permission based on the fallback locale here."
     })
     @ConfDefault.DefaultString("en_US")
-    @AnnotationBasedSorter.Order(4)
+    @AnnotationBasedSorter.Order(6)
     String localeBlackWhiteListFallback();
 
     @ConfKey("i18nPerm.locale-list.use-whitelist")
@@ -68,7 +85,7 @@ public interface Config {
             "Set to false to use blacklist mode."
     })
     @ConfDefault.DefaultBoolean(true)
-    @AnnotationBasedSorter.Order(5)
+    @AnnotationBasedSorter.Order(7)
     boolean localeBlackWhiteListUseWhitelist();
 
     @ConfKey("i18nPerm.locale-list.locales")
@@ -83,7 +100,7 @@ public interface Config {
             "lzh",
             "en_US"
     })
-    @AnnotationBasedSorter.Order(6)
+    @AnnotationBasedSorter.Order(8)
     List<String> localeBlackWhiteList();
 }
 
