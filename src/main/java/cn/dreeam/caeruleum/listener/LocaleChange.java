@@ -45,6 +45,18 @@ public class LocaleChange implements Listener {
             locale = CaeruleumCore.config.localeBlackWhiteListFallback();
         }
 
+        // Certain locale code to certain locale code redirect
+        if (!CaeruleumCore.config.localeRedirectList().isEmpty()) {
+            for (String raw : CaeruleumCore.config.localeRedirectList()) {
+                String[] split = raw.split(":");
+
+                if (split.length == 2 && locale.equalsIgnoreCase(split[0])) {
+                    locale = split[1];
+                    break;
+                }
+            }
+        }
+
         String langPermNode = CaeruleumCore.config.langPermKeyPrefix() + locale;
 
         if (PermUtil.hasLangPerm(langPerms)) {

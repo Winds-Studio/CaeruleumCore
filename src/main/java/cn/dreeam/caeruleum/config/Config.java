@@ -34,15 +34,12 @@ public interface Config {
     @AnnotationBasedSorter.Order(2)
     List<String> oldLangPermPrefixList();
 
-    /*
-    Need redesign here, since, if don't assign any lang permission to those content, it will show for all players.
-    So players use other locale will see both content for main locale and the contents for their locale.
-    Need to move to another force-group setting and use group structure, e.g. {"zh_HK", "zh_TW", "lzh"} -> "zh_CN"
-     */
     @ConfKey("i18nPerm.main-locale")
     @ConfComments({
             "The main server language or the language that most of your server config use,",
-            "CaeruleumCore will not assign lang perm for players who use this locale."
+            "CaeruleumCore will not assign lang perm for players who use this locale.",
+            "The drawback is, player using locales instead of main locale list will see contents for their locale and the original content.",
+            "Leave here blank if every i18n content that corresponds to perms."
     })
     @ConfDefault.DefaultStrings({
             "zh_CN",
@@ -102,5 +99,24 @@ public interface Config {
     })
     @AnnotationBasedSorter.Order(8)
     List<String> localeBlackWhiteList();
+
+    @ConfKey("i18nPerm.locale-code-redirect-list")
+    @ConfComments({
+            "Redirect locale code to certain locale code as you want",
+            "Minecraft locale list: https://minecraft.wiki/w/Language",
+            "AuthMe language code: https://github.com/HaHaWTH/AuthMeReReloaded/blob/master/docs/translations.md",
+            "For example, if you want to show Russian messages to player using language Tatar(tt_ru),",
+            "and show Chinese Simplified messages to player using language Classical Chinese(lzh), then:",
+            "locale-code-redirect-list:",
+            "- 'tt_ru:ru'",
+            "- 'lzh:zhcn'"
+    })
+    @ConfDefault.DefaultStrings({
+            "lzh:zh_CN",
+            "zh_HK:zh_CN",
+            "zh_TW:zh_CN",
+    })
+    @AnnotationBasedSorter.Order(9)
+    List<String> localeRedirectList();
 }
 
