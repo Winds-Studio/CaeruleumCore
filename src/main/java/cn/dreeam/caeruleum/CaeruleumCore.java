@@ -3,6 +3,7 @@ package cn.dreeam.caeruleum;
 import cn.dreeam.caeruleum.config.Config;
 import cn.dreeam.caeruleum.config.ConfigManager;
 import cn.dreeam.caeruleum.listener.LocaleChange;
+import cn.dreeam.caeruleum.listener.PlayerQuit;
 import cn.dreeam.caeruleum.utils.PermUtil;
 import net.luckperms.api.LuckPerms;
 import org.apache.logging.log4j.LogManager;
@@ -49,6 +50,7 @@ public class CaeruleumCore extends JavaPlugin {
 
     private void registerEvents() {
         pluginManager.registerEvents(new LocaleChange(), this);
+        pluginManager.registerEvents(new PlayerQuit(), this);
     }
 
     private void loadConfig() {
@@ -85,9 +87,6 @@ public class CaeruleumCore extends JavaPlugin {
         }
     }
 
-    public static CaeruleumCore getInstance() {
-        return instance;
-    }
     public static LuckPerms getLuckPermsAPI() {
         return luckPermsAPI;
     }

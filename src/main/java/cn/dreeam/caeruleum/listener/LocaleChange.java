@@ -16,15 +16,16 @@ public class LocaleChange implements Listener {
 
     @EventHandler
     public void onLocaleChange(PlayerLocaleChangeEvent e) {
+        UUID uuid = e.getPlayer().getUniqueId();
+
         // Use threshold limit to prevent lag using packets.
-        if (Util.reachThreshold()) {
+        if (Util.reachThreshold(uuid)) {
             final Component message = MiniMessage.miniMessage().deserialize(CaeruleumCore.config.localeChangeIntervalLimitMessage());
             e.getPlayer().sendMessage(message);
             return;
         }
 
         String locale = e.locale().toString();
-        UUID uuid = e.getPlayer().getUniqueId();
         List<String> langPerms = PermUtil.getLangPerm(uuid);
 
         // Remove invalid perms
