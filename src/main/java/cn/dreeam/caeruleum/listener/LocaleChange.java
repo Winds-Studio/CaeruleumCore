@@ -25,7 +25,7 @@ public class LocaleChange implements Listener {
             return;
         }
 
-        String locale = e.locale().toString();
+        String locale = e.locale().toString().toLowerCase();
         List<String> langPerms = PermUtil.getLangPerm(uuid);
 
         // Remove invalid perms

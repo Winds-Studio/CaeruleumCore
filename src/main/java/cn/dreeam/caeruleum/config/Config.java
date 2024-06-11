@@ -42,9 +42,9 @@ public interface Config {
             "Leave here blank if every i18n content that corresponds to perms."
     })
     @ConfDefault.DefaultStrings({
-            "zh_CN",
-            "zh_HK",
-            "zh_TW",
+            "zh_cn",
+            "zh_hk",
+            "zh_tw",
             "lzh"
     })
     @AnnotationBasedSorter.Order(3)
@@ -72,7 +72,7 @@ public interface Config {
             "The fallback locale, if any unknown or unsupported locale found when player join/change locale,",
             "CaeruleumCore will assign lang permission based on the fallback locale here."
     })
-    @ConfDefault.DefaultString("en_US")
+    @ConfDefault.DefaultString("en_us")
     @AnnotationBasedSorter.Order(6)
     String localeBlackWhiteListFallback();
 
@@ -91,11 +91,11 @@ public interface Config {
             "As blacklist, CaeruleumCore will fallback to fallback-locale for any locales in the list if players have."
     })
     @ConfDefault.DefaultStrings({
-            "zh_CN",
-            "zh_HK",
-            "zh_TW",
+            "zh_cn",
+            "zh_hk",
+            "zh_tw",
             "lzh",
-            "en_US"
+            "en_us"
     })
     @AnnotationBasedSorter.Order(8)
     List<String> localeBlackWhiteList();
@@ -104,17 +104,16 @@ public interface Config {
     @ConfComments({
             "Redirect locale code to certain locale code as you want",
             "Minecraft locale list: https://minecraft.wiki/w/Language",
-            "AuthMe language code: https://github.com/HaHaWTH/AuthMeReReloaded/blob/master/docs/translations.md",
             "For example, if you want to show Russian messages to player using language Tatar(tt_ru),",
             "and show Chinese Simplified messages to player using language Classical Chinese(lzh), then:",
             "locale-code-redirect-list:",
-            "- 'tt_ru:ru'",
-            "- 'lzh:zhcn'"
+            "- 'tt_ru:ru_ru'",
+            "- 'lzh:zh_cn'"
     })
     @ConfDefault.DefaultStrings({
-            "lzh:zh_CN",
-            "zh_HK:zh_CN",
-            "zh_TW:zh_CN",
+            "lzh:zh_cn",
+            "zh_HK:zh_cn",
+            "zh_TW:zh_cn",
     })
     @AnnotationBasedSorter.Order(9)
     List<String> localeRedirectList();
