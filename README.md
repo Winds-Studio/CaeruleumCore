@@ -14,7 +14,7 @@ You can use these permissions to work with other plugins to customize contents i
 
 - **Requires latest [LuckPerms](https://luckperms.net/) plugin installed**
 - Support Java 21 and higher
-- Support 1.20.4 ~ Latest Minecraft version (1.20.6)
+- Support 1.20.4 ~ Latest Minecraft version (1.21.1)
 - Compatible with Paper / Paper Forks
 
 ___
