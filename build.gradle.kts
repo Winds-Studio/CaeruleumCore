@@ -21,7 +21,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
-    implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("org.bstats:bstats-bukkit:3.0.3")
 
     compileOnly("net.luckperms:api:5.4")
 }
