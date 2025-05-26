@@ -23,7 +23,7 @@ dependencies {
     implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-M2")
     implementation("org.bstats:bstats-bukkit:3.1.0")
 
-    compileOnly("net.luckperms:api:5.4")
+    compileOnly("net.luckperms:api:5.5")
 }
 
 tasks.withType<JavaCompile> {
