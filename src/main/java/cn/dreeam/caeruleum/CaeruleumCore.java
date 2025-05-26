@@ -15,8 +15,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CaeruleumCore extends JavaPlugin {
 
@@ -73,17 +73,14 @@ public class CaeruleumCore extends JavaPlugin {
     private void initTasks() {
         // Clear old perms task
         if (!config.oldLangPermPrefixList().isEmpty()) {
-            Thread.startVirtualThread(
-                    () -> Arrays.stream(Bukkit.getServer().getOfflinePlayers())
-                    .filter(OfflinePlayer::hasPlayedBefore)
-                    .collect(Collectors.toSet())
-                    .forEach(
-                            p -> config.oldLangPermPrefixList()
-                                    .forEach(
-                                    oldLangPermPrefix -> PermUtil.clearLangPerm(p.getUniqueId(), oldLangPermPrefix)
-                            )
-                    )
-            );
+            Thread.startVirtualThread(() -> {
+                for (OfflinePlayer player : Bukkit.getServer().getOfflinePlayers()) {
+                    if (player.hasPlayedBefore()) {
+                        config.oldLangPermPrefixList()
+                                .forEach(oldLangPermPrefix -> PermUtil.clearLangPerm(player.getUniqueId(), oldLangPermPrefix));
+                    }
+                }
+            });
         }
     }
 
