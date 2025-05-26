@@ -1,4 +1,5 @@
 name: Build CaeruleumCore
+
 on:
   push:
     branches: [ main ]

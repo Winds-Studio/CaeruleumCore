@@ -15,7 +15,7 @@ import java.util.UUID;
 public class LocaleChange implements Listener {
 
     @EventHandler
-    public void onLocaleChange(PlayerLocaleChangeEvent e) {
+    private void onLocaleChange(PlayerLocaleChangeEvent e) {
         UUID uuid = e.getPlayer().getUniqueId();
 
         // Use threshold limit to prevent lag using packets.
