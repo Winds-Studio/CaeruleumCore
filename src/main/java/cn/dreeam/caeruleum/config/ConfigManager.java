@@ -35,7 +35,7 @@ public final class ConfigManager<C> {
                 .build();
         ConfigurationFactory<C> configFactory = SnakeYamlConfigurationFactory.create(
                 configClass,
-                new ConfigurationOptions.Builder().sorter(new AnnotationBasedSorter()).build(),
+                new ConfigurationOptions.Builder().sorter(new AnnotationBasedSorter()).setDottedPathInConfKey(true).build(),
                 // change this if desired
                 yamlOptions);
 
