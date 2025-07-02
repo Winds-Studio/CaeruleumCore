@@ -72,7 +72,8 @@ public class CaeruleumCore extends JavaPlugin {
 
     private void initTasks() {
         // Clear old perms task
-        if (!config.oldLangPermPrefixList().isEmpty()) {
+        if (!config.oldLangPermPrefixList().isEmpty()
+                && !(config.oldLangPermPrefixList().size() == 1 && config.oldLangPermPrefixList().getFirst().equals("winds.i18n.oldkey.example."))) {
             Thread.startVirtualThread(() -> {
                 for (OfflinePlayer player : Bukkit.getServer().getOfflinePlayers()) {
                     if (player.hasPlayedBefore()) {
