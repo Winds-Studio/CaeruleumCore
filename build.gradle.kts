@@ -26,33 +26,35 @@ dependencies {
     compileOnly("net.luckperms:api:5.5")
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
-configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-tasks.build.configure {
-    dependsOn("shadowJar")
-}
-
-tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-    archiveFileName = "${project.name}-${project.version}.${archiveExtension.get()}"
-    exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
-    relocate("space.arim.dazzleconf", "cn.dreeam.caeruleum.libs.dazzleconf")
-    relocate("org.yaml.snakeyaml", "cn.dreeam.caeruleum.libs.snakeyaml")
-    relocate("org.bstats", "cn.dreeam.caeruleum.libs.bstats")
-}
-
 tasks {
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+    }
+
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    build {
+        dependsOn(shadowJar)
+    }
+
+    shadowJar {
+        archiveFileName.set("${project.name}-${project.version}.${archiveExtension.get()}")
+        exclude("META-INF/**") // Dreeam - Avoid to include META-INF/maven in Jar
+        relocate("space.arim.dazzleconf", "${project.group}.libs.dazzleconf")
+        relocate("org.yaml.snakeyaml", "${project.group}.libs.snakeyaml")
+        relocate("org.bstats", "${project.group}.libs.bstats")
+    }
+
     processResources {
         filesMatching("**/plugin.yml") {
             expand(
-                "version" to project.version,
-                "description" to project.description
+                mapOf(
+                    "version" to project.version,
+                    "description" to description
+                )
             )
         }
     }
