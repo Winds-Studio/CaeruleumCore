@@ -15,9 +15,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CaeruleumCore extends JavaPlugin {
 
     private static CaeruleumCore instance;
