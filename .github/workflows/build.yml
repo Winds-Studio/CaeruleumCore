@@ -24,7 +24,7 @@ jobs:
 
       - name: Release CaeruleumCore
         # TODO: Update release
-        uses: marvinpinto/action-automatic-releases@v1
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           title: "CaeruleumCore v1"
           automatic_release_tag: "latest"
