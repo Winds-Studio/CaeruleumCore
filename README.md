@@ -22,5 +22,7 @@ ___
 * Highly optimized
 * Easy to use
 
-## Contact
-- 📫 Discord: `dreeam___` | QQ: `2682173972`
+## 📫 Contact
+
+- Discord: [`https://discord.gg/pUYdgX8cQM`](https://discord.gg/pUYdgX8cQM)
+- QQ: `2682173972`
