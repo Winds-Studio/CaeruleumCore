@@ -22,7 +22,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     // TODO: Waiting for dazzleconf 2.0 complete and mature then migrate to it
     implementation("space.arim.dazzleconf:dazzleconf-ext-snakeyaml:1.3.0-RC1")
-    implementation("org.bstats:bstats-bukkit:3.1.0")
+    implementation("org.bstats:bstats-bukkit:3.2.1")
 
     compileOnly("net.luckperms:api:5.5")
 }
